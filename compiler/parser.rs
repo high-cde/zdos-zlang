@@ -1,5 +1,5 @@
+use crate::compiler::ast::{BinaryOp, Expr, Literal, Stmt};
 use crate::compiler::lexer::{Lexer, Token};
-use crate::compiler::ast::{Expr, Stmt, Literal, BinaryOp};
 
 pub struct Parser {
     lexer: Lexer,
@@ -63,7 +63,11 @@ impl Parser {
     fn parse_additive(&mut self) -> Expr {
         let mut left = self.parse_primary();
         while matches!(self.current_token, Token::Plus | Token::Minus) {
-            let op = if self.current_token == Token::Plus { BinaryOp::Add } else { BinaryOp::Sub };
+            let op = if self.current_token == Token::Plus {
+                BinaryOp::Add
+            } else {
+                BinaryOp::Sub
+            };
             self.advance();
             let right = self.parse_primary();
             left = Expr::Binary(Box::new(left), op, Box::new(right));

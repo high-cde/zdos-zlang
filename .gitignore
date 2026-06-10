@@ -1,0 +1,11 @@
+/target/
+/**/*.rs.bk
+*.log
+*.tmp
+*.bak
+*.old
+*.swp
+.DS_Store
+.env
+.env.*
+!.env.example

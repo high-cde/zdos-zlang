@@ -20,14 +20,25 @@ pub enum Literal {
 
 #[derive(Debug, Clone)]
 pub enum BinaryOp {
-    Add, Sub, Mul, Div, Mod,
-    Eq, Neq, Lt, Gt, Le, Ge,
-    And, Or,
+    Add,
+    Sub,
+    Mul,
+    Div,
+    Mod,
+    Eq,
+    Neq,
+    Lt,
+    Gt,
+    Le,
+    Ge,
+    And,
+    Or,
 }
 
 #[derive(Debug, Clone)]
 pub enum UnaryOp {
-    Not, Neg,
+    Not,
+    Neg,
 }
 
 #[derive(Debug, Clone)]

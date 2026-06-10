@@ -1,10 +1,16 @@
-use crate::compiler::ast::{Expr, Stmt, Literal, BinaryOp};
+use crate::compiler::ast::{BinaryOp, Expr, Literal, Stmt};
 use crate::vm::bytecode::OpCode;
 use crate::vm::value::Value;
 
 pub struct Codegen {
     pub code: Vec<u8>,
     pub constants: Vec<Value>,
+}
+
+impl Default for Codegen {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl Codegen {
@@ -49,7 +55,7 @@ impl Codegen {
                     self.emit_byte(idx as u8);
                 }
                 _ => {}
-            }
+            },
             Expr::Binary(left, op, right) => {
                 self.compile_expr(left);
                 self.compile_expr(right);

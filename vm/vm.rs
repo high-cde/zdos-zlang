@@ -1,5 +1,5 @@
-use crate::vm::value::Value;
 use crate::vm::bytecode::OpCode;
+use crate::vm::value::Value;
 
 pub struct VM {
     pub stack: Vec<Value>,
@@ -36,8 +36,12 @@ impl VM {
                     let a = self.stack.pop().expect("Stack underflow");
                     match (a, b) {
                         (Value::Int(i1), Value::Int(i2)) => self.stack.push(Value::Int(i1 + i2)),
-                        (Value::Float(f1), Value::Float(f2)) => self.stack.push(Value::Float(f1 + f2)),
-                        (Value::Str(s1), Value::Str(s2)) => self.stack.push(Value::Str(format!("{}{}", s1, s2))),
+                        (Value::Float(f1), Value::Float(f2)) => {
+                            self.stack.push(Value::Float(f1 + f2))
+                        }
+                        (Value::Str(s1), Value::Str(s2)) => {
+                            self.stack.push(Value::Str(format!("{}{}", s1, s2)))
+                        }
                         _ => panic!("Type error in ADD"),
                     }
                 }
@@ -46,7 +50,9 @@ impl VM {
                     let a = self.stack.pop().expect("Stack underflow");
                     match (a, b) {
                         (Value::Int(i1), Value::Int(i2)) => self.stack.push(Value::Int(i1 - i2)),
-                        (Value::Float(f1), Value::Float(f2)) => self.stack.push(Value::Float(f1 - f2)),
+                        (Value::Float(f1), Value::Float(f2)) => {
+                            self.stack.push(Value::Float(f1 - f2))
+                        }
                         _ => panic!("Type error in SUB"),
                     }
                 }

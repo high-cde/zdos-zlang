@@ -1,16 +1,49 @@
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
-    Let, Func, If, Else, For, In, While, Return, Import, Module, Throw, Try, Catch,
+    Let,
+    Func,
+    If,
+    Else,
+    For,
+    In,
+    While,
+    Return,
+    Import,
+    Module,
+    Throw,
+    Try,
+    Catch,
     Identifier(String),
     Int(i64),
     Float(f64),
     Str(String),
     Bool(bool),
-    Plus, Minus, Star, Slash, Percent,
-    Eq, EqEq, Neq, Lt, Gt, Le, Ge,
-    And, Or, Not,
-    LParen, RParen, LBrace, RBrace, LBracket, RBracket,
-    Comma, Colon, Dot, Arrow, Range,
+    Plus,
+    Minus,
+    Star,
+    Slash,
+    Percent,
+    Eq,
+    EqEq,
+    Neq,
+    Lt,
+    Gt,
+    Le,
+    Ge,
+    And,
+    Or,
+    Not,
+    LParen,
+    RParen,
+    LBrace,
+    RBrace,
+    LBracket,
+    RBracket,
+    Comma,
+    Colon,
+    Dot,
+    Arrow,
+    Range,
     EOF,
 }
 
@@ -35,7 +68,10 @@ impl Lexer {
 
         let ch = self.input[self.pos];
         match ch {
-            '+' => { self.pos += 1; Token::Plus }
+            '+' => {
+                self.pos += 1;
+                Token::Plus
+            }
             '-' => {
                 self.pos += 1;
                 if self.pos < self.input.len() && self.input[self.pos] == '>' {
@@ -45,8 +81,14 @@ impl Lexer {
                     Token::Minus
                 }
             }
-            '*' => { self.pos += 1; Token::Star }
-            '/' => { self.pos += 1; Token::Slash }
+            '*' => {
+                self.pos += 1;
+                Token::Star
+            }
+            '/' => {
+                self.pos += 1;
+                Token::Slash
+            }
             '=' => {
                 self.pos += 1;
                 if self.pos < self.input.len() && self.input[self.pos] == '=' {
@@ -56,14 +98,38 @@ impl Lexer {
                     Token::Eq
                 }
             }
-            '(' => { self.pos += 1; Token::LParen }
-            ')' => { self.pos += 1; Token::RParen }
-            '{' => { self.pos += 1; Token::LBrace }
-            '}' => { self.pos += 1; Token::RBrace }
-            '[' => { self.pos += 1; Token::LBracket }
-            ']' => { self.pos += 1; Token::RBracket }
-            ',' => { self.pos += 1; Token::Comma }
-            ':' => { self.pos += 1; Token::Colon }
+            '(' => {
+                self.pos += 1;
+                Token::LParen
+            }
+            ')' => {
+                self.pos += 1;
+                Token::RParen
+            }
+            '{' => {
+                self.pos += 1;
+                Token::LBrace
+            }
+            '}' => {
+                self.pos += 1;
+                Token::RBrace
+            }
+            '[' => {
+                self.pos += 1;
+                Token::LBracket
+            }
+            ']' => {
+                self.pos += 1;
+                Token::RBracket
+            }
+            ',' => {
+                self.pos += 1;
+                Token::Comma
+            }
+            ':' => {
+                self.pos += 1;
+                Token::Colon
+            }
             '.' => {
                 self.pos += 1;
                 if self.pos < self.input.len() && self.input[self.pos] == '.' {
@@ -94,7 +160,9 @@ impl Lexer {
 
     fn read_identifier(&mut self) -> Token {
         let start = self.pos;
-        while self.pos < self.input.len() && (self.input[self.pos].is_alphanumeric() || self.input[self.pos] == '_') {
+        while self.pos < self.input.len()
+            && (self.input[self.pos].is_alphanumeric() || self.input[self.pos] == '_')
+        {
             self.pos += 1;
         }
         let s: String = self.input[start..self.pos].iter().collect();
